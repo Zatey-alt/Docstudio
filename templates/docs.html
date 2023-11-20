@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>DocStudio - Documents</title>
+</head>
+<body>
+    <header>
+        <div class="logo">StuDoc</div>
+       
+    </header>
+
+    <h2>Uploaded Documents</h2>
+    <ul>
+        {% for info in doc_info %}
+            <li>
+                <div class="add">
+                    <img src="{{ url_for('static', filename='doc.png') }}" alt="Document" class="avatar">
+                    {{ info['name'] }}
+                </div>
+                <span class="date">Added: {{ info['date_added'].strftime('%Y-%m-%d') }}</span>
+                <div class="feature">
+                    <a href="{{ url_for('open_file', filename=info['name']) }}" target="_blank">
+                        <lord-icon src="https://cdn.lordicon.com/becebamh.json"
+                            trigger="hover"
+                            colors="primary:#ededed"
+                            style="width:30px;height:30px">
+                        </lord-icon>
+                    </a>
+                    <a href="{{ url_for('delete_file', filename=info['name']) }}">
+                        <lord-icon src="https://cdn.lordicon.com/skkahier.json"
+                            trigger="click"
+                            colors="primary:#ededed"
+                            style="width:30px;height:30px">
+                        </lord-icon>
+                    </a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <script src="https://cdn.lordicon.com/lordicon-1.2.0.js"></script>
+</body>
+</html>
