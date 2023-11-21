@@ -4,22 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>DocStudio - Splash</title>
+    <link rel="icon" href="{{ url_for('static', filename='doc.png') }}" type="image/x-icon">
+    <title>DocStudio</title>
 
 
 </head>
 <body>
-    <h1>Welcome to DocStudio</h1>
-    <!-- You can add any additional content or branding for your splash screen -->
-    <div class="spinner">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+    <div class="splash">
+        <h1 style="font-size: 3em;margin-top: 5em;">Welcome to DocStudio<img src="{{ url_for('static', filename='doc1.png') }}" alt="Document"  width="50px
+            " style="margin-left: 10px;"></h1>
+        <p style="color: #fff;">Store and manage document and audio files with ease</p>
+    
+        <div class="spinner">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+
+          <a href="{{ url_for('index') }}" class="button-link">Start</a>
+    </div>
+   
 </body>
 </html>

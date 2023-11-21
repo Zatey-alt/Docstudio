@@ -20,11 +20,11 @@ def create_upload_folder():
   
         os.makedirs(UPLOAD_FOLDER)
 
-@app.route('/splash')
+@app.route('/')
 def splash():
     return render_template('splash.html')
 
-@app.route('/')
+@app.route('/index')
 def index():
     create_upload_folder()
     files = os.listdir(app.config['UPLOAD_FOLDER'])
