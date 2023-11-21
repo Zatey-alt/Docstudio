@@ -11,6 +11,11 @@
         <div class="logo">StuDoc</div>
        
     </header>
+    <div class="navigation">
+        <a href="{{ url_for('index') }}">All Files</a>
+        <a href="{{ url_for('show_docs') }}">Documents</a>
+        <a href="{{ url_for('show_audios') }}">Audios</a>
+    </div>
 
     <h2>Uploaded Documents</h2>
     <ul>
@@ -18,9 +23,9 @@
             <li>
                 <div class="add">
                     <img src="{{ url_for('static', filename='doc.png') }}" alt="Document" class="avatar">
-                    {{ info['name'] }}
+                    {{ info['name'][:15] }}
                 </div>
-                <span class="date">Added: {{ info['date_added'].strftime('%Y-%m-%d') }}</span>
+                <span class="date">{{ info['date_added'].strftime('%Y-%m-%d') }}</span>
                 <div class="feature">
                     <a href="{{ url_for('open_file', filename=info['name']) }}" target="_blank">
                         <lord-icon src="https://cdn.lordicon.com/becebamh.json"

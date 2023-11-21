@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-OKtBwHgOIofCWFT5h9ce9zfeV9nBG53GyyzO2DSBpW4jQIwe7Pu4gGg4+MR3pwq1KWX0K7jZ8QjopwKz9p+H+g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
     <title>DocStudio</title>
@@ -15,26 +15,37 @@
         <div class="logo">StuDoc</div>
 
         <div class="right">
-            <form action="/upload" method="post" enctype="multipart/form-data" class="form">
-                <input type="file" name="file" accept=".pdf, .doc, .docx, .mp3, .wav" required>
-                <button type="submit" class="upload-button">Upload</button>
-            </form>
+            
         </div>
        
     </header>
     <div class="navigation">
+        <a href="{{ url_for('index') }}">All Files</a>
         <a href="{{ url_for('show_docs') }}">Documents</a>
         <a href="{{ url_for('show_audios') }}">Audios</a>
     </div>
-    <hr>
+    
+
     
  
     
 
-   <input type="text" placeholder="Search">
-<h2>All Files</h2>
+    <form action="{{ url_for('search_files') }}" method="get" class="form">
+        <input type="text" placeholder="Search" id="searchInput" name="query" oninput="searchFiles()">
+    </form>
+    
+    
 
+
+<form action="/upload" method="post" enctype="multipart/form-data" class="form">
+    <input type="file" name="file" accept=".pdf, .doc, .docx, .mp3, .wav" required>
+    <button type="submit" class="upload-button">Upload</button>
+</form>
+<h2>All Files</h2>
 <div class="files">
+    <ul id="fileList">
+        <!-- File list will be dynamically updated using JavaScript -->
+    </ul>
     <ul>
         {% for info in file_info %}
             <li>
@@ -44,7 +55,7 @@
                 {% elif info['name'].endswith(('.mp3', '.wav')) %}
                     <img src="{{ url_for('static', filename='audio.png') }}" alt="Audio" class="avatar">
                 {% endif %}
-                {{ info['name'] }}
+                {{ info['name'][:15]  }}
                 </div>
               
                 <span class="date">{{ info['date_added'].strftime('%Y-%m-%d') }}</span>
@@ -70,8 +81,14 @@
 
     </ul>
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://cdn.lordicon.com/lordicon-1.2.0.js"></script>
+    <script>
+  function searchFiles() {
+    document.forms["searchForm"].submit();
+}
+
+    </script>
 </body>
 </html>
 
